@@ -1,2 +1,2 @@
-# tpt2-asset-helper
- A web helper for uploading TPT2 assets
+# tpt2-tools
+ A web helper for creating TPT2 assets

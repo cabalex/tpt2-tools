@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  font-family: "Source Sans 3", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: #36424C;
+  background-color: #eee;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --primary: #00BFD7;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+.card {
+  padding: 2em;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+button {
+  font-size: unset;
+  padding: 5px;
+  border-radius: 4px;
+  background: linear-gradient(to bottom, #FFF 0%, #F3F3F3 100%);
+  color: #36424C;
+  border: 2px solid #C2C2C2;
+  transition: background 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+button:hover:not(:disabled):not(.active) {
+  background: linear-gradient(to bottom, #F3F3F3 0%, #EDEDED 100%);
+}
+button:focus,
+button:focus-visible {
+  border-color: #0099AC;
+}
+button.active {
+  color: white;
+  border-color: #0099AC;
+  background: linear-gradient(to bottom, #00BFD7 0%, #00B6CD 100%);
+}
+.startBtn {
+  padding: 10px 30px;
+}
