@@ -12,9 +12,14 @@
     $: {
         file = files && files.length ? files[0] : null;
         if (dispElem) {
+            // videos
+            dispElem.onloadedmetadata = () => {
+                dims = {width: dispElem.videoWidth, height: dispElem.videoHeight};
+            }
+            // images
             dispElem.onload = () => {
                 console.log(dispElem)
-                dims = {width: dispElem.naturalWidth || dispElem.videoWidth, height: dispElem.naturalHeight || dispElem.videoHeight};
+                dims = {width: dispElem.naturalWidth, height: dispElem.naturalHeight};
             }
         } else {
             dims = null;

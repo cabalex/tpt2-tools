@@ -26,6 +26,13 @@
         window.open("https://create.roblox.com/dashboard/creations/upload?assetType=Decal", "_blank")
     }
 </script>
+<p style="max-width: 700px;">
+    <b>Need a MASSIVE image, bigger than the biggest image panels?</b> Use this tool to split your image to make it even bigger!
+    <br />
+    You can also use this tool to prevent stretching in-game - the tool will add padding to the image to ensure it fits perfectly on your image panel.
+    <br />
+    <i>(Remember, you can stretch the newer image panels in precision build mode up to 4 blocks wide and 8 blocks tall.)</i>
+</p>
 <DecalSizer bind:aspectRatio={aspectRatio} bind:w={w} bind:h={h} unlimited={true} />
 <UploadHandler bind:file={file} />
 <button class="startBtn" disabled={!file || processing} on:click={split}>

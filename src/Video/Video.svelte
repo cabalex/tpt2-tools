@@ -3,7 +3,6 @@
     import DecalSizer from "../Decals/DecalSizer/DecalSizer.svelte";
     import UploadHandler from "../Decals/UploadHandler.svelte";
     import processVideo from "./processVideo";
-    import uploadDecal from "../Uploader/uploadDecal";
 
     let aspectRatio = 1;
     let file = null;
@@ -12,16 +11,11 @@
     let fps = 4;
 
     let processing = false;
-    let robloSecurity = "";
 
     async function convert() {
         processing = true;
         frames = (await processVideo(file, aspectRatio, step)).map(f => { return {url: f, downloaded: false} });
         processing = false;
-    }
-
-    async function upload(index: number) {
-        await uploadDecal(robloSecurity, `${file.name.slice(0, 40)}_${index + 1}.png`, frames[index].url);
     }
 
     function download(index: number) {
@@ -33,6 +27,11 @@
         window.open("https://create.roblox.com/dashboard/creations/upload?assetType=Decal", "_blank")
     }
 </script>
+<p style="max-width: 700px">
+    <b>Play videos in TPT2 using a sequencer!</b> Simply create an image panel and attach it to a sequencer. Then, use the decals generated here to create your video! (you must upload each one manually first.)
+    <br />
+    <i>Video processing takes a while, so be patient!</i>
+</p>
 <DecalSizer bind:aspectRatio={aspectRatio} />
 <UploadHandler accept="video/mp4" bind:file={file} />
 <div>
@@ -40,7 +39,7 @@
     or
     SPF: <input value={step} on:change={(e) => { step = e.target.value; fps = 1 / step }} type="number" max="60" style="width: 50px" />
     <br />
-    <i>Warning: the fastest framerate sequencers can support is 1 image per 0.25s (4 fps).</i>
+    <i>The fastest framerate sequencers can support is 1 image per 0.25s per image panel (4 fps).</i>
 </div>
 <button class="startBtn" disabled={!file || processing} on:click={convert}>
     {#if processing}
@@ -51,12 +50,9 @@
 </button>
 {#if frames.length}
 <div class="frames">
-    <div class="frame">
-        <input bind:value={robloSecurity} />
-    </div>
     {#each frames as frame, i}
     <div class="frame" class:downloaded={frame.downloaded}>
-        <p style="width: 50px">{i+1}</p>
+        <p style="width: 50px">{i+1} ({(i * step).toFixed(2)}s)</p>
         <img src={frame.url} size="1.5em" />
         <div style="flex-grow: 1" />
         <button on:click={() => download(i)}>
