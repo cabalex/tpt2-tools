@@ -16,6 +16,20 @@
   --primary: #00BFD7;
 }
 
+@font-face {
+  font-family: 'Greycliff-CF';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/Greycliff-CF-Extra-Bold.otf');
+}
+
+@font-face {
+  font-family: 'Greycliff-CF';
+  font-style: normal;
+  font-weight: 200;
+  src: url('/Greycliff-CF-Regular.otf');
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -51,6 +65,7 @@ h1 {
 
 button {
   font-size: unset;
+  font-family: unset;
   padding: 5px;
   border-radius: 4px;
   background: linear-gradient(to bottom, #FFF 0%, #F3F3F3 100%);
@@ -61,6 +76,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   gap: 5px;
 }
 button:disabled {
@@ -79,6 +95,63 @@ button.active {
   border-color: #0099AC;
   background: linear-gradient(to bottom, #00BFD7 0%, #00B6CD 100%);
 }
+input {
+  font-size: unset;
+  font-family: unset;
+  font-weight: bold;
+  border: 2px solid #bbb;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+
+/* TPT2 Tools */
+.tpt2tools {
+  background-color: rgb(11, 11, 13);
+  color: #dedede;
+  font-family: 'Greycliff-CF';
+  --primary: rgb(0, 211, 255);
+  color-scheme: dark;
+}
+.tpt2tools button {
+  background: rgb(40, 38, 38);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 100px;
+  color: #eee;
+}
+.tpt2tools button:hover:not(:disabled):not(.active) {
+  background: rgb(74, 70, 70);
+}
+.tpt2tools button:focus,
+.tpt2tools button:focus-visible,
+.tpt2tools button.active {
+  background: rgb(107, 101, 101) !important;
+}
+.tpt2tools input {
+  background-color: #222;
+  color: #eee;
+  border: 2px solid #444;
+}
+
 .startBtn {
-  padding: 10px 30px;
+  padding: 10px 30px !important;
+}
+.tpt2tools .startBtn {
+  background-color: rgb(31, 126, 255);
+  transition: opacity 0.2s ease-in-out;
+  font-weight: bold;
+  font-size: 24px;
+  border-radius: 100px;
+}
+.tpt2tools .startBtn:disabled {
+  background-color: rgb(31, 126, 255) !important;
+  opacity: 0.2
+}
+.tpt2tools .startBtn:hover:not(:disabled) {
+  background-color: rgb(31, 126, 255) !important;
+  opacity: 0.8
+}
+.tpt2tools .intro {
+  display: none;
 }

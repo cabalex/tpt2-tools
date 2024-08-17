@@ -6,7 +6,13 @@
   import Video from "./Video/Video.svelte";
 
   let tab = "decals";
+
+  if (document.location.search.startsWith('?tpt2tools')) {
+    document.body.className = "tpt2tools"
+    tab = document.location.search.includes('video') ? 'video' : 'decals'
+  }
 </script>
+{#if !document.location.search.startsWith('?tpt2tools')}
 <header>
   <h1>TPT2 Tools</h1>
   <button class:active={tab === 'decals'} on:click={() => tab = 'decals'}>
@@ -19,6 +25,7 @@
   </button>
   <h2>cabalex.github.io</h2>
 </header>
+{/if}
 <main>
 {#if tab === 'decals'}
 <Decals />
@@ -67,5 +74,8 @@
     justify-content: center;
     margin-top: 50px;
     gap: 10px;
+  }
+  :global(.tpt2tools > .app > main) {
+    margin-top: 0px;
   }
 </style>

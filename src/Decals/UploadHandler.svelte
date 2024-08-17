@@ -1,7 +1,7 @@
 <script lang="ts">
     import Delete from "svelte-material-icons/Delete.svelte";
     export let file = null;
-    export let accept = "image/jpg,image/png,image/tga,image/bmp";
+    export let accept = "image/*";
 
     let files = null;
     let inputElem;
@@ -39,7 +39,7 @@
         <button class="deleteBtn" on:click={(e) => { files = null; e.stopPropagation()}}>
             <Delete />
         </button>
-        {#if accept.includes("jpg")}
+        {#if accept.includes("image")}
             <img bind:this={dispElem} src={URL.createObjectURL(files[0])} />
         {:else}
             <video bind:this={dispElem} controls autoplay muted loop src={URL.createObjectURL(files[0])} />
@@ -74,6 +74,14 @@
     }
     .uploadHandler:not(.active):hover {
         background-color: #eee;
+        cursor: pointer;
+    }
+    :global(.tpt2tools .uploadHandler) {
+        background-color: #111 !important;
+        border-color: #222 !important;
+    }
+    :global(.tpt2tools .uploadHandler:not(.active):hover) {
+        background-color: #444 !important;
         cursor: pointer;
     }
     .filename {

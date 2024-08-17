@@ -53,15 +53,15 @@
             step="0.5"
             type="number"
         /> <b>tall</b>
-        <p style="margin: 0">({w * 2 / gcd}:{h / gcd})</p>
+        <p style="margin: 0">({w * 2 / gcd > 1000 ? w : w * 2 / gcd}:{w * 2 / gcd > 1000 ? h : h / gcd})</p>
         <p>Or:</p>
-        <button on:click={() => { w = 1; h = 1}}>
+        <button on:click={() => { w = 1; h = 1}} class:active={w === 1 && h === 1}>
             Image sign (1:2)
         </button>
-        <button on:click={() => { w = 1.41; h = 1}}>
+        <button on:click={() => { w = 1.41; h = 1}} class:active={w === 1.41 && h === 1}>
             Diagonal image panel (1 tall, 1.41 wide)
         </button>
-        <button on:click={() => { w = 1.41; h = 2}}>
+        <button on:click={() => { w = 1.41; h = 2}} class:active={w === 1.41 && h === 2}>
             Diagonal image panel (2 tall, 1.41 wide)
         </button>
     </main>
@@ -87,6 +87,9 @@
         flex-direction: row;
         gap: 10px;
     }
+    main button {
+        margin-bottom: 10px;
+    }
     input[type=number] {
         width: 50px;
     }
@@ -94,12 +97,16 @@
         transition: width 0.2s, height 0.2s;
         background-color: var(--primary);
         pointer-events: none;
-        z-index: -1;
         position: absolute;
         bottom: 0;
         left: 0;
         max-width: 100%;
         max-height: 100%;
+        z-index: -1;
+    }
+    :global(.tpt2tools .imagePanel) {
+        z-index: unset !important;
+        mix-blend-mode: screen;
     }
     aside {
         position: relative;
@@ -108,6 +115,7 @@
         background-size: 25% 12.5%;
         border-bottom: 1px solid grey;
         border-right: 1px solid grey;
+        cursor: pointer;
         background-image:
             linear-gradient(to right, grey 1px, transparent 1px),
             linear-gradient(to bottom, grey 1px, transparent 1px);
@@ -115,5 +123,6 @@
     .unlimited {
         background-image: none;
         border: 1px solid grey;
+        cursor: default;
     }
 </style>

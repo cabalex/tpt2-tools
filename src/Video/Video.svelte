@@ -27,29 +27,30 @@
         window.open("https://create.roblox.com/dashboard/creations/upload?assetType=Decal", "_blank")
     }
 </script>
-<p style="max-width: 700px">
+<p class="intro" style="max-width: 700px">
     <b>Play videos in TPT2 using a sequencer!</b> Simply create an image panel and attach it to a sequencer. Then, use the decals generated here to create your video! (you must upload each one manually first.)
     <br />
-    <i>Video processing takes a while, so be patient!</i>
 </p>
 <DecalSizer bind:aspectRatio={aspectRatio} />
 <UploadHandler accept="video/mp4" bind:file={file} />
 <div>
-    FPS: <input value={fps} on:change={(e) => { fps = e.target.value; step = 1 / fps }} type="number" max="60" style="width: 50px" />
+    FPS: <input value={fps} on:change={(e) => { fps = e.target.value; step = 1 / fps }} type="number" max="60" min="0" style="width: 50px" />
     or
-    SPF: <input value={step} on:change={(e) => { step = e.target.value; fps = 1 / step }} type="number" max="60" style="width: 50px" />
+    SPF: <input value={step} on:change={(e) => { step = e.target.value; fps = 1 / step }} type="number" max="60" min="0" style="width: 50px" />
     <br />
     <i>The fastest framerate sequencers can support is 1 image per 0.25s per image panel (4 fps).</i>
 </div>
-<button class="startBtn" disabled={!file || processing} on:click={convert}>
+<button class="startBtn" disabled={!file || processing || aspectRatio === 0 || aspectRatio === Infinity} on:click={convert}>
     {#if processing}
         Processing...
     {:else}
         Convert!
     {/if}
 </button>
+<span style="color: #777">Video processing takes a while, so be patient!</span>
 {#if frames.length}
 <div class="frames">
+    <h2 style="margin-bottom: 5px">{frames.length} frames</h2>
     {#each frames as frame, i}
     <div class="frame" class:downloaded={frame.downloaded}>
         <p style="width: 50px">{i+1} ({(i * step).toFixed(2)}s)</p>
@@ -90,5 +91,11 @@
     }
     .frame button {
         font-size: 1.5em;
+    }
+    :global(.tpt2tools .frame) {
+        border-color: #444 !important;
+    }
+    :global(.tpt2tools .frame img) {
+        background-image: linear-gradient(45deg, #444 25%, transparent 25%), linear-gradient(-45deg, #444 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #444 75%), linear-gradient(-45deg, transparent 75%, #444 75%) !important;
     }
 </style>

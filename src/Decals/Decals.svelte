@@ -11,6 +11,9 @@
     let parts = null;
     let processing = false;
 
+    let maxWidth = window.innerWidth - 20
+    let scale = 1
+
     async function split() {
         processing = true;
         parts = await splitImage(file, w * 2, h, 8, 8);
@@ -26,7 +29,7 @@
         window.open("https://create.roblox.com/dashboard/creations/upload?assetType=Decal", "_blank")
     }
 </script>
-<p style="max-width: 700px;">
+<p class="intro" style="max-width: 700px;">
     <b>Need a MASSIVE image, bigger than the biggest image panels?</b> Use this tool to split your image to make it even bigger!
     <br />
     You can also use this tool to prevent stretching in-game - the tool will add padding to the image to ensure it fits perfectly on your image panel.
@@ -35,7 +38,7 @@
 </p>
 <DecalSizer bind:aspectRatio={aspectRatio} bind:w={w} bind:h={h} unlimited={true} />
 <UploadHandler bind:file={file} />
-<button class="startBtn" disabled={!file || processing} on:click={split}>
+<button class="startBtn" disabled={!file || processing || w <= 0 || h <= 0} on:click={split}>
     {#if processing}
         Processing...
     {:else}
@@ -43,7 +46,7 @@
     {/if}
 </button>
 {#if parts && parts.parts.length}
-<div class="splitImage" style={`width: ${parts.width}px; height: ${parts.height}px; aspect-ratio: ${parts.width / parts.height}`}>
+<div class="splitImage" style={`width: 100%; aspect-ratio: ${parts.width / parts.height}`}>
     {#each parts.parts as frame, i}
     <div on:click={() => download(i)} class="frame" style={`background-image: url(${frame.url}); left: ${frame.left / parts.width * 100}%; top: ${frame.top / parts.height * 100}%; width: ${frame.width / parts.width * 100}%; height: ${frame.height / parts.height * 100}%`} class:downloaded={frame.downloaded}>
         {frame.blockWidth / 2}x{frame.blockHeight}
@@ -66,10 +69,7 @@
         transition: outline 0.1s;
         color: white;
         font-size: 1.5em;
-    }
-    .frame > * {
-        opacity: 0;
-        transition: opacity 0.2s;
+        background-size: cover;
     }
     .frame:hover {
         outline-width: 2px;
@@ -87,7 +87,7 @@
     }
     .frame.downloaded:after {
         z-index: 0;
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 191, 215, 0.5);
     }
     .frame:hover > * {
         opacity: 0;
