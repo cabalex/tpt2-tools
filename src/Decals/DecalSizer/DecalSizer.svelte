@@ -125,4 +125,12 @@
         border: 1px solid grey;
         cursor: default;
     }
+    @media screen and (max-width: 800px) {
+        .decalSizer {
+            flex-direction: column;
+        }
+        aside {
+            width: 100%;
+        }
+    }
 </style>

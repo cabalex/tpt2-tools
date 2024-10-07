@@ -1,6 +1,7 @@
 <script>
   import Image from "svelte-material-icons/Image.svelte";
   import VideoIcon from "svelte-material-icons/Video.svelte";
+  import ChevronLeft from "svelte-material-icons/ChevronLeft.svelte";
 
   import Decals from "./Decals/Decals.svelte";
   import Video from "./Video/Video.svelte";
@@ -12,7 +13,28 @@
     tab = document.location.search.includes('video') ? 'video' : 'decals'
   }
 </script>
-{#if !document.location.search.startsWith('?tpt2tools')}
+{#if document.location.search.startsWith('?tpt2tools')}
+<header class="tpt2toolsHeader">
+  <a href="https://www.themeparktycoon2.com">
+    <img
+      alt="Theme Park Tycoon 2 Workshop "
+      src="https://static.wixstatic.com/media/d83b8d_3983f382560143f0a904019dd0877255~mv2.png"
+      height="80px"
+    >
+  </a>
+  <button on:click={() => history.back()} class="backToWorkshop" style="padding: 0 10px">
+    <ChevronLeft size="2em" />
+    <span>Back to Workshop</span>
+  </button>
+  <button class:active={tab === 'decals'} on:click={() => tab = 'decals'}>
+    Decals
+  </button>
+  <button class:active={tab === 'video'} on:click={() => tab = 'video'}>
+    Video
+  </button>
+  <span style="flex-grow: 1" />
+</header>
+{:else}
 <header>
   <h1>TPT2 Tools</h1>
   <button class:active={tab === 'decals'} on:click={() => tab = 'decals'}>
@@ -75,7 +97,42 @@
     margin-top: 50px;
     gap: 10px;
   }
-  :global(.tpt2tools > .app > main) {
-    margin-top: 0px;
+  :global(.tpt2tools > #app > main) {
+    margin-top: 100px !important;
+  }
+  header.tpt2toolsHeader {
+    height: 100px;
+    background: url(https://static.wixstatic.com/media/d83b8d_b9db4570eeb145c48f2c0dec2b610e47~mv2.jpg);
+    color: white;
+    padding: 14px max(24px, calc(calc(100% - 1350px) / 2));
+    width: calc(100% - 24px);
+    max-width: 1350px;
+    border-bottom: none;
+    border-top: 4px solid white;
+  }
+  header.tpt2toolsHeader button {
+    background-color: transparent;
+    font-size: 21px;
+  }
+  header.tpt2toolsHeader button.active, header.tpt2toolsHeader button:hover, header.tpt2toolsHeader button:focus {
+    background-color: transparent !important;
+    color: #00BDD5;
+  }
+  @media screen and (max-width: 800px) {
+    header h2 {
+      display: none;
+    }
+    header.tpt2toolsHeader {
+      height: 50px;
+      padding: 10px 50px;
+      width: calc(100% - 100px);
+      justify-content: flex-start;
+    }
+    header.tpt2toolsHeader > a, header.tpt2toolsHeader > span {
+      display: none;
+    }
+    .backToWorkshop span {
+      display: none;
+    }
   }
 </style>
