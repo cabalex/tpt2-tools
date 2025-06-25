@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap");
 
 :root {
-  font-family: "Source Sans 3", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Source Sans 3", Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color: #36424C;
+  color: #36424c;
   background-color: #eee;
 
   text-rendering: optimizeLegibility;
@@ -13,21 +14,21 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --primary: #00BFD7;
+  --primary: #00bfd7;
 }
 
 @font-face {
-  font-family: 'Greycliff-CF';
+  font-family: "Greycliff-CF";
   font-style: normal;
   font-weight: 700;
-  src: url('/Greycliff-CF-Extra-Bold.otf');
+  src: url("/Greycliff-CF-Extra-Bold.otf");
 }
 
 @font-face {
-  font-family: 'Greycliff-CF';
+  font-family: "Greycliff-CF";
   font-style: normal;
   font-weight: 200;
-  src: url('/Greycliff-CF-Regular.otf');
+  src: url("/Greycliff-CF-Regular.otf");
 }
 
 a {
@@ -63,15 +64,17 @@ h1 {
   text-align: center;
 }
 
-button {
+button,
+.btn {
   font-size: unset;
   font-family: unset;
   padding: 5px;
   border-radius: 4px;
-  background: linear-gradient(to bottom, #FFF 0%, #F3F3F3 100%);
-  color: #36424C;
-  border: 2px solid #C2C2C2;
-  transition: background 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
+  background: linear-gradient(to bottom, #fff 0%, #f3f3f3 100%);
+  color: #36424c;
+  border: 2px solid #c2c2c2;
+  transition: background 0.1s ease-in-out, border-color 0.1s ease-in-out,
+    color 0.1s ease-in-out;
 
   display: flex;
   align-items: center;
@@ -83,17 +86,21 @@ button:disabled {
   opacity: 0.8;
   cursor: not-allowed;
 }
-button:hover:not(:disabled):not(.active) {
-  background: linear-gradient(to bottom, #F3F3F3 0%, #EDEDED 100%);
+button:hover:not(:disabled):not(.active),
+.btn:hover:not(:disabled):not(.active) {
+  background: linear-gradient(to bottom, #f3f3f3 0%, #ededed 100%);
 }
 button:focus,
-button:focus-visible {
-  border-color: #0099AC;
+button:focus-visible,
+.btn:focus,
+.btn:focus-visible {
+  border-color: #0099ac;
 }
-button.active {
+button.active,
+.btn.active {
   color: white;
-  border-color: #0099AC;
-  background: linear-gradient(to bottom, #00BFD7 0%, #00B6CD 100%);
+  border-color: #0099ac;
+  background: linear-gradient(to bottom, #00bfd7 0%, #00b6cd 100%);
 }
 input {
   font-size: unset;
@@ -104,12 +111,11 @@ input {
   border-radius: 10px;
 }
 
-
 /* TPT2 Tools */
 .tpt2tools {
   background-color: rgb(11, 11, 13);
   color: #dedede;
-  font-family: 'Greycliff-CF';
+  font-family: "Greycliff-CF";
   --primary: rgb(0, 211, 255);
   color-scheme: dark;
 }
@@ -146,11 +152,11 @@ input {
 }
 .tpt2tools .startBtn:disabled {
   background-color: rgb(31, 126, 255) !important;
-  opacity: 0.2
+  opacity: 0.2;
 }
 .tpt2tools .startBtn:hover:not(:disabled) {
   background-color: rgb(31, 126, 255) !important;
-  opacity: 0.8
+  opacity: 0.8;
 }
 .tpt2tools .intro {
   display: none;
