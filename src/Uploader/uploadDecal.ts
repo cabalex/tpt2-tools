@@ -1,5 +1,11 @@
 import { get, writable, type Writable } from "svelte/store";
-import { getUserID, token, type ResponseType } from "./authentication";
+import {
+  getUserID,
+  refresh,
+  refreshAccessToken,
+  token,
+  type ResponseType,
+} from "./authentication";
 
 type AssetStatus =
   | "Waiting"
@@ -97,7 +103,14 @@ export default async function uploadDecal(
   if (response.ok) {
     return { success: true, result: json as UploadResponse };
   } else {
-    // TODO: handle expired tokens
+    if (response.status === 401) {
+      // revalidate token
+      if (!(await refreshAccessToken())) {
+        return { success: false, error: "Not authenticated" };
+      } else {
+        return await uploadDecal(name, file);
+      }
+    }
     console.log(json);
     return { success: false, error: json.message || "Unknown error" };
   }
@@ -212,6 +225,14 @@ export async function getDecalStatus(
   if (response.ok) {
     return { success: true, result: json as OperationStatus };
   } else {
+    if (response.status === 401) {
+      // revalidate token
+      if (!(await refreshAccessToken())) {
+        return { success: false, error: "Not authenticated" };
+      } else {
+        return await getDecalStatus(operationId);
+      }
+    }
     console.log(json);
     return { success: false, error: json.message || "Unknown error" };
   }

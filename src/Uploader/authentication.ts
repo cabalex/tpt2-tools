@@ -101,7 +101,11 @@ export async function verifyCode(
   );
 }
 
-export async function refreshAccessToken(refreshToken: string) {
+export async function refreshAccessToken(refreshToken?: string) {
+  if (!refreshToken) {
+    refreshToken = localStorage.getItem("tpt2-refresh_token") ?? undefined;
+    if (!refreshToken) return false;
+  }
   return await refresh(
     new URLSearchParams({
       client_id: clientID,
